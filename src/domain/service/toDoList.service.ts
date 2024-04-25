@@ -1,24 +1,28 @@
 import { ToDoEntity, entityFactory } from '../entity/todo.entity';
 import { toDoListRepo } from '../repositories/toDoList.repo';
 
-type ToDoList = Set<ToDoEntity>;
 
 export const toDoListService = () => {
-  const todoList: ToDoList = new Set();
 
-  const { getAll } = toDoListRepo();
+  const { getAll, save } = toDoListRepo();
 
-  console.log(getAll());
+  const createToDoItem = ({ content, state}: {content: ToDoEntity['content'], state: ToDoEntity['state']}) => {
+    const newTodo = entityFactory.create({
+      content,
+      state
+    });
 
-  const createToDoItem = (toDoContent: ToDoEntity['content']) => {
-    const newTodo = entityFactory.create(toDoContent);
-
-    todoList.add(newTodo);
     return newTodo;
   };
+
+  const handleSaveToRepo = (data: ToDoEntity) => {
+    save(data)
+    console.log(localStorage.length)
+  }
 
   return {
     getToDoList: getAll,
     createToDoItem,
+    handleSaveToRepo
   };
 };

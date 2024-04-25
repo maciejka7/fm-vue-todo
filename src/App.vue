@@ -5,7 +5,7 @@ import { useToDo } from './composables/useToDo.ts';
 
 const { toDoList } = useToDo();
 
-console.log(toDoList);
+console.log(toDoList)
 </script>
 
 <template>

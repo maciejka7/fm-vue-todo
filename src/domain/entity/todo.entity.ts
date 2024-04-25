@@ -8,11 +8,11 @@ export type ToDoEntity = BaseEntity & {
   state: ToDoState;
 };
 
-const createToDo = (content: ToDoEntity['content']): ToDoEntity => {
+const createToDo = ({ content, state}: {content: ToDoEntity['content'], state: ToDoEntity['state']}): ToDoEntity => {
   return {
     id: createId(),
     content,
-    state: 'active',
+    state
   };
 };
 
